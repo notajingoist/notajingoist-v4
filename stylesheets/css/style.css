@@ -281,7 +281,18 @@ ul li.sub {
   background-size: 100px auto;
 }
 
-/* line 297, ../sass/_content.scss */
+/* line 294, ../sass/_content.scss */
+#content-about p {
+  margin-bottom: 20px;
+}
+/* line 298, ../sass/_content.scss */
+#content-about img {
+  width: 500px;
+  height: auto;
+  border: 7px solid #c6d2e3;
+}
+
+/* line 309, ../sass/_content.scss */
 .project-img {
   -webkit-transition: opacity 0.1s ease-in-out;
   -webkit-transition-delay: 0;
@@ -294,25 +305,25 @@ ul li.sub {
   cursor: pointer;
   margin-bottom: 25px;
 }
-/* line 308, ../sass/_content.scss */
+/* line 320, ../sass/_content.scss */
 .project-img.last {
   margin-right: 0;
 }
-/* line 312, ../sass/_content.scss */
+/* line 324, ../sass/_content.scss */
 .project-img.faded {
   opacity: 0.1;
 }
-/* line 317, ../sass/_content.scss */
+/* line 329, ../sass/_content.scss */
 .project-img:hover {
   outline: 7px solid #9fdbdf;
 }
 
-/* line 323, ../sass/_content.scss */
+/* line 335, ../sass/_content.scss */
 .project-tags {
   margin-bottom: 20px;
 }
 
-/* line 329, ../sass/_content.scss */
+/* line 341, ../sass/_content.scss */
 .tag {
   -webkit-transition: all 0.1s ease-in-out;
   -webkit-transition-delay: 0;
@@ -324,7 +335,7 @@ ul li.sub {
   line-height: 2;
   cursor: pointer;
 }
-/* line 339, ../sass/_content.scss */
+/* line 351, ../sass/_content.scss */
 .tag.highlighted {
   background-color: yellow;
 }
