@@ -16,13 +16,35 @@ var SITE = {
 		this.bindEvents();
 
 		this.linkSelected = false;
-		this.currentLink = 'notajingoist';
+		this.currentLink = this.getAnchor(window.location.href);//'notajingoist';
 		$('#' + this.currentLink).addClass('selected');
 
 
 		this.$currentContent = $('#content-' + this.currentLink);
 		this.$currentContent.addClass('show');
 
+
+		console.log(this.currentLink);
+	},
+
+	getAnchor: function(url) {
+		var anchor = '';
+		var foundAnchor = false;
+		for (var i = 0; i < url.length; i++) {
+			if (foundAnchor) {
+				anchor += url[i];
+			}
+
+			if (url[i] == '#') {
+				foundAnchor = true;
+			}
+		}
+
+		if (!foundAnchor) {
+			return 'notajingoist';
+		} else {
+			return anchor;
+		}
 	},
 
 	bindEvents: function() {
