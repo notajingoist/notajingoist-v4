@@ -1,30 +1,21 @@
 var SITE = {
 	init: function() {
+		this.setVars();
+		this.setCurrentContent();
+		this.bindEvents();
+	},
+
+	setVars: function() {
 		this.$document = $(window.document);
 		this.$body = $('body');
-		this.$defn = $('#definition');
-		this.$header = $('.header');
+		
 		this.$word = $('#word');
+		this.$defn = $('#definition');
+		
 		this.$content = $('.content');
-
 		this.$projectTiles = $('.project-img');
 		this.$tags = $('.tag');
-
-		this.$li = $('.nav-link');
-
-		//this.$link = $('.nav-link');
-		this.bindEvents();
-
-		this.linkSelected = false;
-		this.currentLink = this.getAnchor(window.location.href);//'notajingoist';
-		$('#' + this.currentLink).addClass('selected');
-
-
-		this.$currentContent = $('#content-' + this.currentLink);
-		this.$currentContent.addClass('show');
-
-
-		console.log(this.currentLink);
+		this.$navLinks = $('.nav-link');
 	},
 
 	getAnchor: function(url) {
@@ -47,41 +38,27 @@ var SITE = {
 		}
 	},
 
-	bindEvents: function() {
-		//this.$li.on('click', 'a', this.revealContent.bind(this));
-		this.$li.on('mouseenter', 'a', this.highlightLink.bind(this));
-		this.$li.on('mouseleave', 'a', this.unhighlightLink.bind(this));
-		this.$li.on('click', 'a', this.selectLink.bind(this));
-		this.$tags.on('click', this.filterProjects.bind(this));
+	setCurrentContent: function() {
+		this.linkSelected = false;
+		this.currentLink = this.getAnchor(window.location.href);
+		$('#' + this.currentLink).addClass('selected');
+		this.$currentContent = $('#content-' + this.currentLink);
+		this.$currentContent.addClass('show');
+	},
 
+	bindEvents: function() {
 		this.$word.on('mouseenter', this.revealDefn.bind(this));
 		this.$word.on('mouseleave', this.hideDefn.bind(this));
-		//this.$link.on('mouseleave', this.hideDefn.bind(this));
 
+		this.$navLinks.on('mouseenter', 'a', this.highlightLink.bind(this));
+		this.$navLinks.on('mouseleave', 'a', this.unhighlightLink.bind(this));
+		this.$navLinks.on('click', 'a', this.selectLink.bind(this));
+
+		this.$tags.on('click', this.filterProjects.bind(this));
 		this.$projectTiles.on('click', this.selectTags.bind(this));
 	},
 
-	resetProjectsContent: function(e) {
-		this.$projectTiles.removeClass('faded');
-		this.$tags.removeClass('highlighted');
-	},
-
-	selectTags: function(e) {
-		this.resetProjectsContent();
-
-		var selectedTags = e.currentTarget.className.split(/\s+/);
-		//selectedTags[0] = project-img, selectedTags[1...] = tag names
-		setTimeout(function() {
-			for (var i = 1; i < selectedTags.length ; i++) {
-				if (selectedTags[i] != 'last') {
-					$('#tag-' + selectedTags[i]).addClass('highlighted');
-				}
-			}
-		});
-		//alert(classes[0]);
-	},
-
-	filterProjects: function(e) {
+	filterProjects: function(e) { //projects page
 		this.resetProjectsContent();
 		var context = this;
 
@@ -106,11 +83,30 @@ var SITE = {
 		
 	},
 
-	selectLink: function(e) {
-		//alert($());
+	selectTags: function(e) { //projects page
 		this.resetProjectsContent();
 
-		this.$li.removeClass('selected');
+		var selectedTags = e.currentTarget.className.split(/\s+/);
+		//selectedTags[0] = project-img, selectedTags[1...] = tag names
+		setTimeout(function() {
+			for (var i = 1; i < selectedTags.length ; i++) {
+				if (selectedTags[i] != 'last') {
+					$('#tag-' + selectedTags[i]).addClass('highlighted');
+				}
+			}
+		});
+	},
+
+	resetProjectsContent: function(e) { //projects page
+		this.$projectTiles.removeClass('faded');
+		this.$tags.removeClass('highlighted');
+	},
+	
+	selectLink: function(e) { //nav link
+		//reveal content
+		this.resetProjectsContent();
+
+		this.$navLinks.removeClass('selected');
 		this.$content.removeClass('show');
 
 		this.linkSelected = false;
@@ -124,70 +120,46 @@ var SITE = {
 		});
 	},
 
-	highlightLink: function(e) {
-		this.$link = $(e.currentTarget).parent();
-		if (!this.linkSelected && this.$link.attr('id') != this.currentLink) {
-			this.$link.addClass('selected');
+	highlightLink: function(e) { //nav link
+		this.$target = $(e.currentTarget).parent();
+		if (!this.linkSelected && this.$target.attr('id') != this.currentLink) {
+			this.$target.addClass('selected');
 			this.linkSelected = true;
 		}
-
-		// $(e.currentTarget).on('mouseleave', this.unhighlightLink(this));
 	},
 
-	unhighlightLink: function(e) {
-
-		this.$link = $(e.currentTarget).parent();
-		if (this.linkSelected && this.$link.hasClass('selected')
-			&& this.$link.attr('id') != this.currentLink) {
-			this.$link.removeClass('selected');
+	unhighlightLink: function(e) { //nav link
+		this.$target = $(e.currentTarget).parent();
+		if (this.linkSelected && this.$target.hasClass('selected')
+			&& this.$target.attr('id') != this.currentLink) {
+			this.$target.removeClass('selected');
 			this.linkSelected = false;
 		}
 	},
 
-	revealDefn: function(e) {
-		//console.log(e.currentTarget);
+	revealDefn: function(e) { //header link
 		this.$defn.addClass('show');
 	},
 
-	hideDefn: function(e) {
+	hideDefn: function(e) { //header link
 		this.$defn.removeClass('show');
-	},
-
-	revealContent: function(e) {
-		//alert(e.currentTarget.id);
-		// alert(e.currentTarget.parent().id);
-		// this.$targetContent = $('#content-' + e.currentTarget.parent().id);
-		// this.$targetContent.addClass('show');
-		//this.$('#content-' + e.currentTarget.id).addClass('show');
-
-		//alert('hi');
-		//console.log(this.$defn);
-		//this.$defn.addClass('show');
-		//this.$word.css('background-color', '#ff0');
-	},
-
-	hideContent: function(e) {
-		this.$targetContent = $('#content-' + e.currentTarget.id);
-		this.$targetContent.removeClass('show');
-		//this.$defn.removeClass('show');
-		//this.$word.css('background-color', '#fff');
-	},
-
-	doSomething: function(e) {
-		var $blah = $(e.currentTarget);
-		var context = this;
-
-		this.$blah.each(function(index, element) {
-			if (element === $('whatever')[0]) {
-				$(this).addClass('hello');
-			}
-		});
-		setTimeout(function() {
-			context.$blah.removeClass('goodbye');
-		});
-
-		e.preventDefault();	
 	}
+
+	// doSomething: function(e) {
+	// 	var $blah = $(e.currentTarget);
+	// 	var context = this;
+
+	// 	this.$blah.each(function(index, element) {
+	// 		if (element === $('whatever')[0]) {
+	// 			$(this).addClass('hello');
+	// 		}
+	// 	});
+	// 	setTimeout(function() {
+	// 		context.$blah.removeClass('goodbye');
+	// 	});
+
+	// 	e.preventDefault();	
+	// }
 }
 
 SITE.init();
