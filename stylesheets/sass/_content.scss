@@ -391,7 +391,12 @@ ul {
 // 	}
 // }
 .project-tiles {
-
+	@include transition(all 0.4s ease-in-out 0);
+	position: relative;
+	top: 0;
+	&.expanded {
+		top: 350px;// 400px;	
+	}
 }
 
 .project-img {
@@ -408,6 +413,8 @@ ul {
 	margin-bottom: 25px;
 	display: inline-block;
 	//padding: 10px;
+	//
+	
 
 
 	@include respond-to($breakpoint-2) {
@@ -437,8 +444,52 @@ ul {
 		// 	outline: 4px solid $blue;
 		// }	
 	}
+
+	// &.expanded {
+	// 	//top: 500px;	
+	// }
+
+	// &.expanded {
+	// 	//@include transition(all 0.3s ease-in-out 0);
+	// 	width: 100%;
+	// 	max-width: 475px;
+	// 	height: auto;
+	// }
 }
 
+.project-preview {
+	
+	position: relative;
+	img {
+		@include transition(all 0.8s ease-in-out 0);
+		width: 100%;
+		height: auto;
+		max-width: 475px;
+		position: absolute;
+		//top: -500px;
+		//top: -475px;
+		margin-bottom: 20px;
+		opacity: 0;
+		visibility: hidden;
+		
+		&.expanded {
+			//top: 0;
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+
+	//top: 0;
+	//top: -500px;
+	// opacity: 0;
+	// visibility: hidden;
+	
+	//position: absolute;
+	
+	// background: url('../../images/projects/synapse.png') no-repeat;
+	// background-size: cover;
+	
+}
 
 .project-tags {
 	//background-color: $violet;

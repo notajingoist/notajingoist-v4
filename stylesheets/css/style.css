@@ -343,7 +343,22 @@ ul li.sub {
   border: 7px solid #c6d2e3;
 }
 
+/* line 393, ../sass/_content.scss */
+.project-tiles {
+  -webkit-transition: all 0.4s ease-in-out;
+  -webkit-transition-delay: 0;
+  -moz-transition: all 0.4s ease-in-out 0;
+  -o-transition: all 0.4s ease-in-out 0;
+  transition: all 0.4s ease-in-out 0;
+  position: relative;
+  top: 0;
+}
 /* line 397, ../sass/_content.scss */
+.project-tiles.expanded {
+  top: 350px;
+}
+
+/* line 402, ../sass/_content.scss */
 .project-img {
   -webkit-transition: opacity 0.1s ease-in-out;
   -webkit-transition-delay: 0;
@@ -359,28 +374,53 @@ ul li.sub {
   display: inline-block;
 }
 @media only screen and (max-width: 600px) {
-  /* line 397, ../sass/_content.scss */
+  /* line 402, ../sass/_content.scss */
   .project-img {
     margin-bottom: 10px;
     margin-right: 10px;
     width: 100%;
   }
 }
-/* line 428, ../sass/_content.scss */
+/* line 435, ../sass/_content.scss */
 .project-img.faded {
   opacity: 0.1;
 }
-/* line 433, ../sass/_content.scss */
+/* line 440, ../sass/_content.scss */
 .project-img:hover {
   outline: 7px solid #9fdbdf;
 }
 
-/* line 443, ../sass/_content.scss */
+/* line 460, ../sass/_content.scss */
+.project-preview {
+  position: relative;
+}
+/* line 463, ../sass/_content.scss */
+.project-preview img {
+  -webkit-transition: all 0.8s ease-in-out;
+  -webkit-transition-delay: 0;
+  -moz-transition: all 0.8s ease-in-out 0;
+  -o-transition: all 0.8s ease-in-out 0;
+  transition: all 0.8s ease-in-out 0;
+  width: 100%;
+  height: auto;
+  max-width: 475px;
+  position: absolute;
+  margin-bottom: 20px;
+  opacity: 0;
+  visibility: hidden;
+}
+/* line 475, ../sass/_content.scss */
+.project-preview img.expanded {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* line 494, ../sass/_content.scss */
 .project-tags {
   margin-bottom: 20px;
 }
 
-/* line 449, ../sass/_content.scss */
+/* line 500, ../sass/_content.scss */
 .tag {
   -webkit-transition: all 0.1s ease-in-out;
   -webkit-transition-delay: 0;
@@ -392,7 +432,7 @@ ul li.sub {
   line-height: 2;
   cursor: pointer;
 }
-/* line 459, ../sass/_content.scss */
+/* line 510, ../sass/_content.scss */
 .tag.highlighted {
   background-color: yellow;
 }
